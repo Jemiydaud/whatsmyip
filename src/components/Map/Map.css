@@ -1,0 +1,9 @@
+.mapContainer{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 80px;
+
+}
