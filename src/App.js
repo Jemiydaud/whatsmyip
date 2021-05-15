@@ -3,37 +3,44 @@ import axios from  'axios';
 import './App.css';
 import Ip from './components/IP/IP.js';
 import Map from './components/Map/Map.js';
+import InfoCard from './components/Card/Card.js'
+
+
 
 
 
 function App() {
-  const [ipAddress, setIpAddress] = useState([])
-  //const [isLoading, setLoading] = useState(true)
-  const [lat,setLat] = useState([])
-  const [lng,setLng] = useState([])
+  const [ipAddress, setIpAddress] = useState("")
+  const [isLoading, setLoading] = useState(true)
+  const [lat,setLat] = useState("")
+  const [lng,setLng] = useState("")
+  const [country, setCountry] = useState ("");
+  const [city, setCity] = useState ("");
+  const [flag, setFlag] = useState ("");
+
+  
 
  const  API_KEY = process.env.REACT_APP_IPFY_API_KEY ;
-    console.log(API_KEY)
+    
   
 
   
   useEffect(() => {
     async function fetchIp() {
+      setLoading(true)
       try {
            axios.get(`https://geo.ipify.org/api/v1?apiKey=${API_KEY}
            `).then((result) => {
-            console.log(result.data)
-            const userIp = result.data.ip;
-            const userLng = result.data.location.lng;
-            const userLat = result.data.location.lat;
-            setIpAddress(userIp);
+           
+            
+            setIpAddress(result.data.ip);
             setLat(result.data.location.lat);
-            console.log(lat)
             setLng(result.data.location.lng);
-            console.log(lng);
-            //setIsLoading(false);
-            console.log(userLng);
-            console.log(userLat);
+            setCountry(result.data.location.country);
+            setCity(result.data.location.city);
+            setFlag(result.data.location.flag);
+            setLoading(false);
+            return;
           });
         } catch (error) {
           alert("No results");
@@ -42,21 +49,32 @@ function App() {
     
       fetchIp();
     
-    },[lng, lat, ipAddress]);
+    },[]);
+
     
     
     return (
       <div className="App">
-    
-        <h1>
-          Whats My IP Address
-        </h1>
-    
-        <Ip ipAddress={ipAddress}  />
-        <Map lat={lat} lng={lng} />
-    
-    
-    
+
+        {isLoading ? (
+          <div>
+          <p>Loading......</p>
+          <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          </div>
+        ):(<div>
+          <header className="App-header">
+          <h1>
+            Whats My IP Address
+          </h1>
+          </header> 
+         <div id = "container"> 
+          <InfoCard ipAddress={ipAddress} city={city} flag={flag} country={country}/>
+          
+          <Map lat={lat} lng={lng} />
+        </div>
+        </div>)
+        }
+        
       </div>
     );
   };
