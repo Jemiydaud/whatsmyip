@@ -16,6 +16,7 @@ export default function InfoCard({ipAddress, city, flag, country}){
     <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" />
     <Card.Body>
     <Card.Title>{country}</Card.Title>
+    <Card.Text/>Your IP Addresss {ipAddress}
     <Card.Text>
      You are currently Located in {city}
     </Card.Text>
