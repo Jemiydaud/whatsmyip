@@ -19,8 +19,8 @@ export default function InfoCard({ipAddress, city, flag, country}){
     <Card.Text>
      You are currently Located in {city}
     </Card.Text>
-    <Card.Img src={Calender} alt="" style={{height:'20px', width:'20px'}} />Today is {DateTime.now().toFormat('D')} <br/>
-    <Card.Img src={Clock} alt ="" style={{height:'20px', width:'20px'}} /> The Local Time is {DateTime.now().toFormat('t')}
+    <Card.Text />Today is {DateTime.now().toFormat('D')} <br/>
+    <Card.Text /> The Local Time is {DateTime.now().toFormat('t')}
    </Card.Body>
    
 </Card>
